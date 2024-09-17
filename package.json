@@ -1,0 +1,44 @@
+{
+  "name": "@creativeslice/video-in-modal",
+  "version": "2024.9.17",
+  "description": "Open video in modal",
+  "author": "Creative Slice",
+  "license": "GPL-2.0-or-later",
+  "keywords": [
+    "gulp",
+    "plugin",
+    "gutenberg",
+    "WordPress"
+  ],
+  "homepage": "https://github.com/creativeslice/cslice-video-in-modal#readme",
+  "repository": "github:creativeslice/cslice-video-in-modal",
+  "main": "gulpfile.js",
+  "scripts": {
+    "gulp:dev": "export NODE_ENV=development;gulp",
+    "gulp:prod": "export DISABLE_NOTIFIER=true;export NODE_ENV=production;gulp",
+    "gulp:watch": "export NODE_ENV=development;gulp;gulp watch",
+    "prettier:check": "npx prettier --check . || true",
+    "prettier:fix": "npx prettier --write ."
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.3",
+    "@babel/preset-env": "^7.24.3",
+    "@babel/runtime": "^7.24.1",
+    "@wordpress/prettier-config": "^2.25.13",
+    "eslint": "^8.57",
+    "gulp": "^4",
+    "gulp-autoprefixer": "^7.0",
+    "gulp-babel": "^8.0",
+    "gulp-clean-css": "^4.2",
+    "gulp-if": "^3.0",
+    "gulp-jshint": "^2.1",
+    "gulp-notify": "^3.2",
+    "gulp-plumber": "^1.2",
+    "gulp-sass": "^5.1",
+    "gulp-strip-debug": "^3.0",
+    "gulp-terser": "^2.1",
+    "jshint": "^2.13",
+    "prettier": "npm:wp-prettier@^2.8.5",
+    "sass": "^1.72"
+  }
+}
