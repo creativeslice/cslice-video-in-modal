@@ -101,24 +101,25 @@ function cslice_video_in_modal_render_block_core_button($block_content, $block) 
 add_filter('render_block_core/button', 'cslice_video_in_modal_render_block_core_button', 10, 2);
 
 
+
+
 /**
- * Enqueue files if 'youtube' or 'vimeo' is in the block content - PERFORMANCE ISSUES
+ * Video Modal Button - Block Pattern
  */
-/*
-function cslice_video_in_modal_render_block_core_button( $block_content, $block ) {
-	if ( strpos($block_content, 'youtube') !== false || strpos($block_content, 'vimeo') !== false ) {
-		// Enqueue files
-		wp_enqueue_style('cslice-video-in-modal-styles');
-		wp_enqueue_script('cslice-video-in-modal-scripts');
-
-		// Add class for js
-		$block_content = new WP_HTML_Tag_Processor( $block_content );
-		$block_content->next_tag();
-		$block_content->add_class( 'open-video-in-modal' );
-		$block_content->get_updated_html();
-	}
-
-	return $block_content;
+function cslice_video_in_modal_register_block_patterns() {
+    if (function_exists('register_block_pattern')) {
+        register_block_pattern('cslice/video-modal-button', array(
+            'title'      => __('Vimeo YouTube Button', 'cslice-video-in-modal'),
+            'description'=> __('Button to open a Vimeo or YouTube video in a modal popup.', 'cslice-video-in-modal'),
+            'keywords'   => array('video', 'modal', 'button', 'youtube', 'vimeo', 'dialog', 'popup'),
+            'categories' => array('media'),
+            'content'    => '<!-- wp:buttons -->
+                <div class="wp-block-buttons"><!-- wp:button {"className":"open-video-in-modal"} -->
+                <div class="wp-block-button open-video-in-modal"><a class="wp-block-button__link" href="https://vimeo.com/925983356">Open Video</a></div>
+                <!-- /wp:button --></div>
+                <!-- /wp:buttons -->',
+        ));
+    }
 }
-add_action( 'render_block_core/button', 'cslice_video_in_modal_render_block_core_button', 10, 2 );
-*/
+add_action('init', 'cslice_video_in_modal_register_block_patterns');
+
