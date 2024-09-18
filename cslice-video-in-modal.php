@@ -39,12 +39,9 @@ function cslice_video_in_modal_enqueue_assets() {
 	$stylesUrl = plugin_dir_url(__FILE__) . $styles . '?v=' . CSLICE_VIDEO_IN_MODAL_PLUGIN_VERSION;
 	wp_register_style('cslice-video-in-modal-styles', $stylesUrl, [], '', 'all');
 
-
 	$scripts = 'assets/cslice-video-in-modal.js';
 	$scriptsUrl = plugin_dir_url(__FILE__) . $scripts . '?v=' . CSLICE_VIDEO_IN_MODAL_PLUGIN_VERSION;
 	wp_register_script('cslice-video-in-modal-scripts', $scriptsUrl, [], '', ['strategy' => 'defer']);
-
-
 }
 add_action('wp_enqueue_scripts', 'cslice_video_in_modal_enqueue_assets');
 
@@ -53,10 +50,16 @@ add_action('wp_enqueue_scripts', 'cslice_video_in_modal_enqueue_assets');
  * Enqueue files if class exists on button
  */
 function cslice_video_in_modal_render_block_core_button( $block_content, $block ) {
-	// if ( ! empty($block['attrs']['className']) && strpos($block['attrs']['className'], 'open-video-in-modal') !== false ) {
 	if ( strpos($block_content, 'youtube') !== false || strpos($block_content, 'vimeo') !== false ) {
+		// Enqueue files
 		wp_enqueue_style('cslice-video-in-modal-styles');
 		wp_enqueue_script('cslice-video-in-modal-scripts');
+
+		// Add class for js
+		$block_content = new WP_HTML_Tag_Processor( $block_content );
+		$block_content->next_tag(); /* first tag should always be ul or ol */
+		$block_content->add_class( 'open-video-in-modal' );
+		$block_content->get_updated_html();
 	}
 
 	return $block_content;
