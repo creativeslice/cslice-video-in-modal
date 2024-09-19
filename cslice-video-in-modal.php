@@ -107,7 +107,7 @@ function cslice_video_in_modal_register_block_patterns() {
 			'categories' => array('media'),
 			'content'	=> '<!-- wp:buttons -->
 				<div class="wp-block-buttons"><!-- wp:button {"className":"open-video-in-modal"} -->
-				<div class="wp-block-button open-video-in-modal"><a class="wp-block-button__link" href="https://vimeo.com/925983356">Open Video</a></div>
+				<div class="wp-block-button open-video-in-modal"><a class="wp-block-button__link" href="">Open Video</a></div>
 				<!-- /wp:button --></div>
 				<!-- /wp:buttons -->',
 		));
