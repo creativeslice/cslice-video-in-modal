@@ -12,9 +12,7 @@
  * Text Domain:       cslice-video-in-modal
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
+defined( 'ABSPATH' ) || exit;
 
 // Retrieve plugin version from the plugin header
 $plugin_data = get_file_data(__FILE__, ['Version' => 'Version']);
@@ -35,12 +33,10 @@ function cslice_video_in_modal_enqueue_assets() {
 		return; // Stop if in admin
 	}
 
-	$styles = 'assets/cslice-video-in-modal.css';
-	$stylesUrl = plugin_dir_url(__FILE__) . $styles . '?v=' . CSLICE_VIDEO_IN_MODAL_PLUGIN_VERSION;
+	$stylesUrl = plugin_dir_url(__FILE__) . 'build/style.css' . '?v=' . CSLICE_VIDEO_IN_MODAL_PLUGIN_VERSION;
 	wp_register_style('cslice-video-in-modal-styles', $stylesUrl, [], '', 'all');
 
-	$scripts = 'assets/cslice-video-in-modal.js';
-	$scriptsUrl = plugin_dir_url(__FILE__) . $scripts . '?v=' . CSLICE_VIDEO_IN_MODAL_PLUGIN_VERSION;
+	$scriptsUrl = plugin_dir_url(__FILE__) . 'build/index.js' . '?v=' . CSLICE_VIDEO_IN_MODAL_PLUGIN_VERSION;
 	wp_register_script('cslice-video-in-modal-scripts', $scriptsUrl, [], '', ['strategy' => 'defer']);
 }
 add_action('wp_enqueue_scripts', 'cslice_video_in_modal_enqueue_assets');

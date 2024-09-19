@@ -12,33 +12,22 @@
   ],
   "homepage": "https://github.com/creativeslice/cslice-video-in-modal#readme",
   "repository": "github:creativeslice/cslice-video-in-modal",
-  "main": "gulpfile.js",
   "scripts": {
-    "gulp:dev": "export NODE_ENV=development;gulp",
-    "gulp:prod": "export DISABLE_NOTIFIER=true;export NODE_ENV=production;gulp",
-    "gulp:watch": "export NODE_ENV=development;gulp;gulp watch",
-    "prettier:check": "npx prettier --check . || true",
-    "prettier:fix": "npx prettier --write ."
+    "build": "wp-scripts build",
+    "lint:css": "wp-scripts lint-style",
+    "lint:js": "wp-scripts lint-js",
+    "lint:js:src": "wp-scripts lint-js ./src",
+    "lint:js:src:fix": "wp-scripts lint-js ./src --fix",
+    "start": "wp-scripts start",
+    "packages-update": "wp-scripts packages-update",
+    "update-pot": "wp i18n make-pot . languages/enable-linked-groups.pot --exclude=src",
+    "plugin-zip": "wp-scripts plugin-zip"
+  },
+  "dependencies": {
+    "classnames": "^2.3.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.24.3",
-    "@babel/preset-env": "^7.24.3",
-    "@babel/runtime": "^7.24.1",
-    "@wordpress/prettier-config": "^2.25.13",
-    "eslint": "^8.57",
-    "gulp": "^4",
-    "gulp-autoprefixer": "^7.0",
-    "gulp-babel": "^8.0",
-    "gulp-clean-css": "^4.2",
-    "gulp-if": "^3.0",
-    "gulp-jshint": "^2.1",
-    "gulp-notify": "^3.2",
-    "gulp-plumber": "^1.2",
-    "gulp-sass": "^5.1",
-    "gulp-strip-debug": "^3.0",
-    "gulp-terser": "^2.1",
-    "jshint": "^2.13",
-    "prettier": "npm:wp-prettier@^2.8.5",
-    "sass": "^1.72"
+    "@wordpress/scripts": "^26.15.0",
+    "webpack-remove-empty-scripts": "^1.0.4"
   }
 }
