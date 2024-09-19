@@ -18,7 +18,6 @@ defined( 'ABSPATH' ) || exit;
 $plugin_data = get_file_data(__FILE__, ['Version' => 'Version']);
 $plugin_version = $plugin_data['Version'];
 
-
 // Define plugin version constant
 if (!defined('CSLICE_VIDEO_IN_MODAL_PLUGIN_VERSION')) {
 	define('CSLICE_VIDEO_IN_MODAL_PLUGIN_VERSION', $plugin_version);
@@ -42,7 +41,6 @@ function cslice_video_in_modal_enqueue_assets() {
 add_action('wp_enqueue_scripts', 'cslice_video_in_modal_enqueue_assets');
 
 
-
 /**
  * Add video data attribute to the button block
  *
@@ -51,71 +49,68 @@ add_action('wp_enqueue_scripts', 'cslice_video_in_modal_enqueue_assets');
  * @return string               The modified block content with the data attribute applied, or the original content if not applicable.
  */
 function cslice_video_in_modal_render_block_core_button($block_content, $block) {
-    // Check if the block has the class 'open-video-in-modal'
-    if (!isset($block['attrs']['className']) || strpos($block['attrs']['className'], 'open-video-in-modal') === false) {
-        return $block_content;
-    }
+	// Check if the block has the class 'open-video-in-modal'
+	if (!isset($block['attrs']['className']) || strpos($block['attrs']['className'], 'open-video-in-modal') === false) {
+		return $block_content;
+	}
 
-    // Enqueue files
-    wp_enqueue_style('cslice-video-in-modal-styles');
-    wp_enqueue_script('cslice-video-in-modal-scripts');
+	// Enqueue files
+	wp_enqueue_style('cslice-video-in-modal-styles');
+	wp_enqueue_script('cslice-video-in-modal-scripts');
 
-    // Modify the button attributes using the HTML API
-    $processor = new WP_HTML_Tag_Processor($block_content);
+	// Modify the button attributes using the HTML API
+	$processor = new WP_HTML_Tag_Processor($block_content);
 
-    if ($processor->next_tag('a')) {
-        $url = $processor->get_attribute('href');
-        if ($url) {
+	if ($processor->next_tag('a')) {
+		$url = $processor->get_attribute('href');
+		if ($url) {
 
-            // Vimeo URL parameters
+			// Vimeo URL parameters
 			// https://vimeo.com/925983356
-            if (strpos($url, 'vimeo.com') !== false) {
-                $video_id = substr(parse_url($url, PHP_URL_PATH), 1);
-                $url = "https://player.vimeo.com/video/$video_id?autoplay=1";
+			if (strpos($url, 'vimeo.com') !== false) {
+				$video_id = substr(parse_url($url, PHP_URL_PATH), 1);
+				$url = "https://player.vimeo.com/video/$video_id?autoplay=1";
 
 			// YouTube URL parameters
 			// https://youtu.be/peJbhfeS6Zc
 			// https://www.youtube.com/watch?v=peJbhfeS6Zc
-            } elseif (strpos($url, 'youtube.com') !== false || strpos($url, 'youtu.be') !== false) {
-                $video_id = '';
-                if (strpos($url, 'youtube.com') !== false) {
-                    parse_str(parse_url($url, PHP_URL_QUERY), $query_params);
-                    $video_id = $query_params['v'] ?? '';
-                } elseif (strpos($url, 'youtu.be') !== false) {
-                    $video_id = substr(parse_url($url, PHP_URL_PATH), 1);
-                }
-                if ($video_id) {
-                    $url = "https://www.youtube.com/embed/$video_id?modestbranding=1&autoplay=1&rel=0";
-                }
-            }
-            $processor->set_attribute('data-iframe', esc_url($url));
-        }
-    }
+			} elseif (strpos($url, 'youtube.com') !== false || strpos($url, 'youtu.be') !== false) {
+				$video_id = '';
+				if (strpos($url, 'youtube.com') !== false) {
+					parse_str(parse_url($url, PHP_URL_QUERY), $query_params);
+					$video_id = $query_params['v'] ?? '';
+				} elseif (strpos($url, 'youtu.be') !== false) {
+					$video_id = substr(parse_url($url, PHP_URL_PATH), 1);
+				}
+				if ($video_id) {
+					$url = "https://www.youtube.com/embed/$video_id?modestbranding=1&autoplay=1&rel=0";
+				}
+			}
+			$processor->set_attribute('data-iframe', esc_url($url));
+		}
+	}
 
-    return $processor->get_updated_html();
+	return $processor->get_updated_html();
 }
 add_filter('render_block_core/button', 'cslice_video_in_modal_render_block_core_button', 10, 2);
-
-
 
 
 /**
  * Video Modal Button - Block Pattern
  */
 function cslice_video_in_modal_register_block_patterns() {
-    if (function_exists('register_block_pattern')) {
-        register_block_pattern('cslice/video-modal-button', array(
-            'title'      => __('Vimeo YouTube Button', 'cslice-video-in-modal'),
-            'description'=> __('Button to open a Vimeo or YouTube video in a modal popup.', 'cslice-video-in-modal'),
-            'keywords'   => array('video', 'modal', 'button', 'youtube', 'vimeo', 'dialog', 'popup'),
-            'categories' => array('media'),
-            'content'    => '<!-- wp:buttons -->
-                <div class="wp-block-buttons"><!-- wp:button {"className":"open-video-in-modal"} -->
-                <div class="wp-block-button open-video-in-modal"><a class="wp-block-button__link" href="https://vimeo.com/925983356">Open Video</a></div>
-                <!-- /wp:button --></div>
-                <!-- /wp:buttons -->',
-        ));
-    }
+	if (function_exists('register_block_pattern')) {
+		register_block_pattern('cslice/video-modal-button', array(
+			'title'  	=> __('Vimeo YouTube Button', 'cslice-video-in-modal'),
+			'description'=> __('Button to open a Vimeo or YouTube video in a modal popup.', 'cslice-video-in-modal'),
+			'keywords'   => array('video', 'modal', 'button', 'youtube', 'vimeo', 'dialog', 'popup'),
+			'categories' => array('media'),
+			'content'	=> '<!-- wp:buttons -->
+				<div class="wp-block-buttons"><!-- wp:button {"className":"open-video-in-modal"} -->
+				<div class="wp-block-button open-video-in-modal"><a class="wp-block-button__link" href="https://vimeo.com/925983356">Open Video</a></div>
+				<!-- /wp:button --></div>
+				<!-- /wp:buttons -->',
+		));
+	}
 }
 add_action('init', 'cslice_video_in_modal_register_block_patterns');
-
