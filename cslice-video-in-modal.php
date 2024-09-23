@@ -32,10 +32,10 @@ function cslice_video_in_modal_enqueue_assets() {
 		return; // Stop if in admin
 	}
 
-	$stylesUrl = plugin_dir_url(__FILE__) . 'build/style.css' . '?v=' . CSLICE_VIDEO_IN_MODAL_PLUGIN_VERSION;
+	$stylesUrl = plugin_dir_url(__FILE__) . 'build/cslice-video-in-modal-styles.css' . '?v=' . CSLICE_VIDEO_IN_MODAL_PLUGIN_VERSION;
 	wp_register_style('cslice-video-in-modal-styles', $stylesUrl, [], '', 'all');
 
-	$scriptsUrl = plugin_dir_url(__FILE__) . 'build/index.js' . '?v=' . CSLICE_VIDEO_IN_MODAL_PLUGIN_VERSION;
+	$scriptsUrl = plugin_dir_url(__FILE__) . 'build/cslice-video-in-modal.js' . '?v=' . CSLICE_VIDEO_IN_MODAL_PLUGIN_VERSION;
 	wp_register_script('cslice-video-in-modal-scripts', $scriptsUrl, [], '', ['strategy' => 'defer']);
 }
 add_action('wp_enqueue_scripts', 'cslice_video_in_modal_enqueue_assets');

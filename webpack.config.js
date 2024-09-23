@@ -9,8 +9,8 @@ module.exports = {
 	...defaultConfig,
 
 	entry: {
-		'index' : path.resolve( process.cwd(), 'src/index.js' ),
-		'style': path.resolve( process.cwd(), 'src/index.scss' ),
+		'cslice-video-in-modal' : path.resolve( process.cwd(), 'src/index.js' ),
+		'cslice-video-in-modal-styles': path.resolve( process.cwd(), 'src/index.scss' ),
 	},
 
 	plugins: [
