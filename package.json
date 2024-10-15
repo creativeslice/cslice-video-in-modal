@@ -1,34 +1,34 @@
 {
-  "name": "@creativeslice/video-in-modal",
-  "version": "2024.9.17",
-  "description": "Open video in modal",
-  "author": "Creative Slice",
-  "license": "GPL-2.0-or-later",
-  "keywords": [
-    "gulp",
-    "plugin",
-    "gutenberg",
-    "WordPress"
-  ],
-  "homepage": "https://github.com/creativeslice/cslice-video-in-modal#readme",
-  "repository": "github:creativeslice/cslice-video-in-modal",
-  "scripts": {
-    "build": "wp-scripts build",
-    "lint:css": "wp-scripts lint-style",
-    "lint:css:src:fix": "wp-scripts lint-style ./src/index.scss --fix",
-    "lint:js": "wp-scripts lint-js",
-    "lint:js:src": "wp-scripts lint-js ./src",
-    "lint:js:src:fix": "wp-scripts lint-js ./src --fix",
-    "start": "wp-scripts start",
-    "packages-update": "wp-scripts packages-update",
-    "update-pot": "wp i18n make-pot . languages/enable-linked-groups.pot --exclude=src",
-    "plugin-zip": "wp-scripts plugin-zip"
-  },
-  "dependencies": {
-    "classnames": "^2.3.2"
-  },
-  "devDependencies": {
-    "@wordpress/scripts": "^26.15.0",
-    "webpack-remove-empty-scripts": "^1.0.4"
-  }
+	"name": "@creativeslice/video-in-modal",
+	"version": "2024.10.14",
+	"description": "Play video in modal",
+	"author": "Creative Slice",
+	"license": "GPL-2.0-or-later",
+	"keywords": [
+		"plugin",
+		"gutenberg",
+		"WordPress"
+	],
+	"homepage": "https://github.com/creativeslice/cslice-video-in-modal#readme",
+	"repository": "github:creativeslice/cslice-video-in-modal",
+	"scripts": {
+		"build": "wp-scripts build",
+		"start": "wp-scripts start",
+		"format": "wp-scripts format",
+		"lint:css": "wp-scripts lint-style",
+		"lint:css:src:fix": "wp-scripts lint-style ./src/index.scss --fix",
+		"lint:js": "wp-scripts lint-js",
+		"lint:js:src": "wp-scripts lint-js ./src",
+		"lint:js:src:fix": "wp-scripts lint-js ./src --fix",
+		"packages-update": "wp-scripts packages-update",
+		"update-pot": "wp i18n make-pot . languages/enable-linked-groups.pot --exclude=src",
+		"plugin-zip": "wp-scripts plugin-zip"
+	},
+	"dependencies": {
+		"classnames": "^2.3.2"
+	},
+	"devDependencies": {
+		"@wordpress/scripts": "^30.1.0",
+		"webpack-remove-empty-scripts": "^1.0.4"
+	}
 }

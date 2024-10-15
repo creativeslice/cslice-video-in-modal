@@ -2,10 +2,10 @@
 /**
  * Plugin Name:       Creative Slice Video In Modal
  * Description:       Play YouTube or Vimeo video in modal.
- * Requires at least: 6.4
+ * Requires at least: 6.6
  * Tested up to:      6.6.2
  * Requires PHP:      8.0
- * Version:           0.2.0
+ * Version:           0.3.0
  * Author:            Creative Slice
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -25,7 +25,7 @@ if (!defined('CSLICE_VIDEO_IN_MODAL_PLUGIN_VERSION')) {
 
 
 /**
- * Frontend styles & scripts
+ * Register scripts & styles so they can be enqueued below
  */
 function cslice_video_in_modal_enqueue_assets() {
 	if ( is_admin() ) {
@@ -42,14 +42,10 @@ add_action('wp_enqueue_scripts', 'cslice_video_in_modal_enqueue_assets');
 
 
 /**
- * Add video data attribute to the button block
- *
- * @param string $block_content The original HTML content of the block.
- * @param array  $block         The block details, including attributes.
- * @return string               The modified block content with the data attribute applied, or the original content if not applicable.
+ * Add video data attribute to the wp-core-button block
  */
 function cslice_video_in_modal_render_block_core_button($block_content, $block) {
-	// Check if the block has the class 'open-video-in-modal'
+	// Check if button has class of 'open-video-in-modal'
 	if (!isset($block['attrs']['className']) || strpos($block['attrs']['className'], 'open-video-in-modal') === false) {
 		return $block_content;
 	}
@@ -96,7 +92,7 @@ add_filter('render_block_core/button', 'cslice_video_in_modal_render_block_core_
 
 
 /**
- * Video Modal Button - Block Pattern
+ * Register Block Pattern - Video Modal Button
  */
 function cslice_video_in_modal_register_block_patterns() {
 	if (function_exists('register_block_pattern')) {
