@@ -1,10 +1,10 @@
 <?php
 /**
- * Plugin Name:       Creative Slice Video In Modal
- * Description:       Play YouTube or Vimeo video in modal.
- * Version:           2024.12.03
+ * Plugin Name:       Creative Slice - Video In Modal
+ * Description:       Block extension to to play YouTube or Vimeo video in modal from button.
+ * Version:           2024.12.03.1
  * Requires at least: 6.6
- * Tested up to:      6.6.2
+ * Tested up to:      6.7.1
  * Requires PHP:      8.0
  * Author:            Creative Slice
  * License:           GPL-2.0-or-later
@@ -20,7 +20,8 @@ if (is_admin()) {
 	require_once plugin_dir_path(__FILE__) . 'cslice-plugin-updater-public.php';
 	new CSlice\VideoInModal\Plugin_Updater(
 		__FILE__,
-		'creativeslice/cslice-video-in-modal'
+		'creativeslice/cslice-video-in-modal',
+		'main'
 	);
 }
 
@@ -37,10 +38,10 @@ if (!defined('CSLICE_VIDEO_IN_MODAL_VERSION')) {
 function cslice_video_in_modal_enqueue_assets() {
 	if (is_admin()) return;
 
-	$stylesUrl = plugin_dir_url(__FILE__) . 'build/index.css' . '?v=' . CSLICE_VIDEO_IN_MODAL_PLUGIN_VERSION;
+	$stylesUrl = plugin_dir_url(__FILE__) . 'build/index.css' . '?v=' . CSLICE_VIDEO_IN_MODAL_VERSION;
 	wp_register_style('cslice-video-in-modal-styles', $stylesUrl, [], '', 'all');
 
-	$scriptsUrl = plugin_dir_url(__FILE__) . 'build/index.js' . '?v=' . CSLICE_VIDEO_IN_MODAL_PLUGIN_VERSION;
+	$scriptsUrl = plugin_dir_url(__FILE__) . 'build/index.js' . '?v=' . CSLICE_VIDEO_IN_MODAL_VERSION;
 	wp_register_script('cslice-video-in-modal-scripts', $scriptsUrl, [], '', ['strategy' => 'defer']);
 }
 add_action('wp_enqueue_scripts', 'cslice_video_in_modal_enqueue_assets');
