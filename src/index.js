@@ -4,6 +4,8 @@
  * @version     2024.9.18
  */
 
+import './index.scss';
+
 window.addEventListener( 'DOMContentLoaded', function () {
 	/**
 	 * Create dialog element & close button (used below)

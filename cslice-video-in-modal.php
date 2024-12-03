@@ -2,40 +2,45 @@
 /**
  * Plugin Name:       Creative Slice Video In Modal
  * Description:       Play YouTube or Vimeo video in modal.
+ * Version:           2024.12.03
  * Requires at least: 6.6
  * Tested up to:      6.6.2
  * Requires PHP:      8.0
- * Version:           0.3.0
  * Author:            Creative Slice
  * License:           GPL-2.0-or-later
- * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       cslice-video-in-modal
  */
 
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
 
-// Retrieve plugin version from the plugin header
-$plugin_data = get_file_data(__FILE__, ['Version' => 'Version']);
-$plugin_version = $plugin_data['Version'];
+/**
+ * Plugin updater - PUBLIC REPO
+ */
+if (is_admin()) {
+	require_once plugin_dir_path(__FILE__) . 'cslice-plugin-updater-public.php';
+	new CSlice\VideoInModal\Plugin_Updater(
+		__FILE__,
+		'creativeslice/cslice-video-in-modal'
+	);
+}
 
-// Define plugin version constant
-if (!defined('CSLICE_VIDEO_IN_MODAL_PLUGIN_VERSION')) {
-	define('CSLICE_VIDEO_IN_MODAL_PLUGIN_VERSION', $plugin_version);
+if (!defined('CSLICE_VIDEO_IN_MODAL_VERSION')) {
+	$plugin_data = get_file_data(__FILE__, array('Version' => 'Version'));
+    define('CSLICE_VIDEO_IN_MODAL_VERSION', $plugin_data['Version']);
 }
 
 
 /**
  * Register scripts & styles so they can be enqueued below
  */
+// TODO: Use built-in versioning from asset php files.
 function cslice_video_in_modal_enqueue_assets() {
-	if ( is_admin() ) {
-		return; // Stop if in admin
-	}
+	if (is_admin()) return;
 
-	$stylesUrl = plugin_dir_url(__FILE__) . 'build/cslice-video-in-modal-styles.css' . '?v=' . CSLICE_VIDEO_IN_MODAL_PLUGIN_VERSION;
+	$stylesUrl = plugin_dir_url(__FILE__) . 'build/index.css' . '?v=' . CSLICE_VIDEO_IN_MODAL_PLUGIN_VERSION;
 	wp_register_style('cslice-video-in-modal-styles', $stylesUrl, [], '', 'all');
 
-	$scriptsUrl = plugin_dir_url(__FILE__) . 'build/cslice-video-in-modal.js' . '?v=' . CSLICE_VIDEO_IN_MODAL_PLUGIN_VERSION;
+	$scriptsUrl = plugin_dir_url(__FILE__) . 'build/index.js' . '?v=' . CSLICE_VIDEO_IN_MODAL_PLUGIN_VERSION;
 	wp_register_script('cslice-video-in-modal-scripts', $scriptsUrl, [], '', ['strategy' => 'defer']);
 }
 add_action('wp_enqueue_scripts', 'cslice_video_in_modal_enqueue_assets');
@@ -94,6 +99,7 @@ add_filter('render_block_core/button', 'cslice_video_in_modal_render_block_core_
 /**
  * Register Block Pattern - Video Modal Button
  */
+// TODO: Move to a separate file in src directory
 function cslice_video_in_modal_register_block_patterns() {
 	if (function_exists('register_block_pattern')) {
 		register_block_pattern('cslice/video-modal-button', array(

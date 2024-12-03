@@ -1,6 +1,5 @@
 {
 	"name": "@creativeslice/video-in-modal",
-	"version": "2024.10.14",
 	"description": "Play video in modal",
 	"author": "Creative Slice",
 	"license": "GPL-2.0-or-later",
@@ -21,14 +20,12 @@
 		"lint:js:src": "wp-scripts lint-js ./src",
 		"lint:js:src:fix": "wp-scripts lint-js ./src --fix",
 		"packages-update": "wp-scripts packages-update",
-		"update-pot": "wp i18n make-pot . languages/enable-linked-groups.pot --exclude=src",
 		"plugin-zip": "wp-scripts plugin-zip"
 	},
 	"dependencies": {
 		"classnames": "^2.3.2"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "^30.1.0",
-		"webpack-remove-empty-scripts": "^1.0.4"
+		"@wordpress/scripts": "^30.6.0"
 	}
 }
